@@ -87,21 +87,15 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
   /* USER CODE END 2 */
-
-
-
-
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-   
-   
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-    
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -161,7 +155,6 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
-    
   }
   /* USER CODE END Error_Handler_Debug */
 }
