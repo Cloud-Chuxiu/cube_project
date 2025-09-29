@@ -89,21 +89,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   /* USER CODE END 2 */
 
-
-
-
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-   
-   
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-    HAL_Delay(3000);
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-    HAL_Delay(3000);
 
     /* USER CODE BEGIN 3 */
   }
@@ -114,7 +104,6 @@ int main(void)
   * @brief System Clock Configuration
   * @retval None
   */
-
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -151,10 +140,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void EXTI1_IRQHandler()
-{
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
-}
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
@@ -162,10 +147,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   {
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
-  }
-  else if(GPIO_Pin==GPIO_PIN_2)
-  {
-    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_2);
   }
 }
 
