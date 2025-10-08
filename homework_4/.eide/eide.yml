@@ -14,7 +14,7 @@ virtualFolder:
 dependenceList: []
 outDir: build
 miscInfo:
-  uid: 9b4d70a163712a138965bfdd39a95a41
+  uid: 70d5d36e9fb43e58b6c15f8a48fba53a
 targets:
   Debug:
     cppPreprocessAttrs:
@@ -22,8 +22,7 @@ targets:
         - USE_HAL_DRIVER
         - STM32F103xB
       incList: []
-      libList:
-        - Core/Inc
+      libList: []
     excludeList: []
     toolchain: GCC
     toolchainConfigMap:

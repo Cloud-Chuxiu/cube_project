@@ -54,15 +54,10 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//参数设定
+//参数定义
 uint16_t n = 0;
 uint8_t flag_pa3 = 0;
 uint8_t flag_pa4 = 0;
-
-
-
-
-
 /* USER CODE END 0 */
 
 /**
@@ -103,7 +98,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    
+
     /* USER CODE BEGIN 3 */
     while(flag_pa3 == 0 && flag_pa4 == 0)
     {
@@ -115,16 +110,13 @@ int main(void)
     }
     if(flag_pa3 == 1)
     {
-      while(flag_pa3 == 1)
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+      HAL_Delay(500);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+      HAL_Delay(n * 100);
+      if(n > 1)
       {
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-        HAL_Delay(500);
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-        HAL_Delay(n * 100); 
-        if(n > 1)
-        {
-          n--;
-        }
+        n--;
       }
     }
     if(flag_pa4 == 1)
@@ -132,7 +124,7 @@ int main(void)
       HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
       HAL_Delay(500);
       HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-      HAL_Delay(500); 
+      HAL_Delay(500);
     }
   }
   /* USER CODE END 3 */
@@ -151,7 +143,7 @@ void SystemClock_Config(void)
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -180,17 +172,16 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin==GPIO_PIN_3)                          
-  {
+ if(GPIO_Pin==GPIO_PIN_3)                          
+ {
     flag_pa3 = 1;
     flag_pa4 = 0;
-
-  }
-  else if(GPIO_Pin==GPIO_PIN_4)
-  {
-    flag_pa4 = 1;
+ }
+ else if(GPIO_Pin==GPIO_PIN_4)
+ {
     flag_pa3 = 0;
-  }
+    flag_pa4 = 1;
+ }
 }
 /* USER CODE END 4 */
 
