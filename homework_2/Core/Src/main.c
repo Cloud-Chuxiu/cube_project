@@ -95,10 +95,33 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
-    HAL_Delay(3000);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);    
-    while(1); //亮3s后终止
+    //效果A
+    for(int i = 0;i < 5; i++)\
+    {
+      HAL_Delay(500);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_RESET);
+      HAL_Delay(500);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_SET);
+
+    }
+
+    //效果B
+    for(int i = 0;i < 3;i++)
+    {
+      HAL_Delay(200);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_RESET);
+      HAL_Delay(200);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_SET);
+    }
+    HAL_Delay(1000);
+    for(int i = 0; i < 3;i++)
+    {
+      HAL_Delay(200);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_RESET);
+      HAL_Delay(800);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13,GPIO_PIN_SET);
+    }
+    HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

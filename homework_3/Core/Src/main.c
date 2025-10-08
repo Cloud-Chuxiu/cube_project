@@ -95,10 +95,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
-    HAL_Delay(3000);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);    
-    while(1); //亮3s后终止
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -144,6 +141,18 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+//中断控制
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+   if(GPIO_Pin==GPIO_PIN_1)                          
+  {
+     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);
+  }
+}
+
+
 
 /* USER CODE END 4 */
 
