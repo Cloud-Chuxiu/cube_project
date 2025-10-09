@@ -89,10 +89,22 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef);
-  __HAL_TIM_SetAutoreload();
+  
+  
 
-
+  void Delay_us(uint16_t us)
+  {
+    HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef*htim1);
+    __HAL_TIM_SetAutoreload(&htim1, us);
+    __HAL_TIM_SetCounter(&htim1,0);
+    HAL_TIM_Base_Start(&htim1); 
+    uint16_t counter = 0;  
+    while(counter != us)
+    {
+      counter = __HAL_TIM_GetCounter(&htim1);
+    }
+    HAL_TIM_Base_Stop(&htim1); 
+  }
 
   /* USER CODE END 2 */
 
@@ -100,6 +112,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    Delay_us(1000);
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13); 
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -161,6 +178,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+    
   }
   /* USER CODE END Error_Handler_Debug */
 }
